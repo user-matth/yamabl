@@ -5,7 +5,6 @@
             <h4 class="text-start">Residentes</h4>
             <a href="{{ route('residents.create') }}" class="btn btn-primary btn-sm">Novo</a>
         </div>
-        <hr>
         @if (session()->has('message'))
             <div class= "alert alert-success" role="alert">
                 {{ session()->get('message') }}
@@ -14,9 +13,9 @@
         <table class="table">
         <thead>
             <tr>
-            <th scope="col">#</th>
-            <th scope="col" class="text-start">Nome</th>
-            <th scope="col"></th>
+                <th scope="col" style="width: 40px">#</th>
+                <th scope="col" class="text-start">Nome</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -33,11 +32,6 @@
                         <a href="{{ route('residents.show', ['resident' => $resident->id]) }}" class="text-black text-decoration-none">
                             <span class="material-symbols-outlined">
                                 visibility
-                            </span>
-                        </a>
-                        <a href="" class="text-black text-decoration-none">
-                            <span class="material-symbols-outlined">
-                                delete
                             </span>
                         </a>
                     </td>

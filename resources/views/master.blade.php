@@ -22,8 +22,8 @@
                     <h3 class="float-md-start mb-0 fw-bold">YAMABL</h3>
                     <nav class="nav nav-masthead justify-content-center float-md-end">
                         <a class="nav-link fw-bold py-1 px-2 active" aria-current="page" href="/yamabl/public/">Home</a>
-                        <a class="nav-link fw-bold py-1 px-2" href="/yamabl/public/residents">Moradores</a>
-                        <a class="nav-link fw-bold py-1 px-2" href="/yamabl/public/condominiuns">Condomínios</a>
+                        <a class="nav-link fw-bold py-1 px-2" href="{{ route('residents.index') }}">Moradores</a>
+                        <a class="nav-link fw-bold py-1 px-2" href="{{ route('condominiuns.index') }}">Condomínios</a>
                     </nav>
                 </div>
             </header>

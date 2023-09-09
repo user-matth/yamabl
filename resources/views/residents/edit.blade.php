@@ -20,12 +20,14 @@
                   <input type="text" name="name" class="form-control" value="{{ $resident->name }}">
                 </div>
                 <div class="col-sm-4 d-flex flex-column justify-content-center align-items-start">
-                  <label for="firstName" class="form-label">Condomínio</label>
-                  <select class="form-select" name="condominia_id" aria-label="Select Condominium">
-                    @foreach ($condominiums as $condominium)
-                        <option value="{{ (int)$condominium->id }}">{{ $condominium->name }}</option>
-                    @endforeach
-                </select>
+                    <label for="firstName" class="form-label">Condomínio</label>
+                    <select class="form-select" name="condominia_id" aria-label="Select Condominium">
+                        @foreach ($condominiums as $condominium)
+                            <option value="{{ $condominium->id }}" {{ $resident->condominia_id == $condominium->id ? 'selected' : '' }}>
+                                {{ $condominium->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <a class="btn btn-outline-primary btn-sm mt-4 float-start" href="{{ route('residents.index') }}">Voltar</a>

@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Resident;
 use App\Models\Condominium;
 
-class ResidentController extends Controller
+class CondominiumController extends Controller
 {
-    public Resident $residents;
     public Condominium $condominiuns;
-    public function __construct(Resident $residents, Condominium $condominiuns) {
-        $this->residents = $residents;
+    public function __construct(Condominium $condominiuns) {
         $this->condominiuns = $condominiuns;
     }
 
@@ -22,8 +19,8 @@ class ResidentController extends Controller
      */
     public function index()
     {
-        $residents = $this->residents->all();
-        return view('residents.index', ['residents' => $residents]);
+        $condominiuns = $this->condominiuns->all();
+        return view('condominiuns.index', ['condominiuns' => $condominiuns]);
     }
 
     /**
@@ -34,7 +31,7 @@ class ResidentController extends Controller
     public function create()
     {
         $condominiums = $this->condominiuns->all();
-        return view('residents.create', compact('condominiums'));
+        return view('condominiuns.create', compact('condominiums'));
     }
 
     /**
@@ -45,12 +42,12 @@ class ResidentController extends Controller
      */
     public function store(Request $request)
     {
-        $created = $this->residents->create([
+        $created = $this->condominiuns->create([
             'name' => $request->input('name'),
             'condominia_id' => $request->input('condominia_id'),
         ]);
         if ($created) {
-            return redirect()->route('residents.index')->with('message', 'Morador(a) cadastrado com sucesso');
+            return redirect()->route('condominiuns.index')->with('message', 'Condomínio cadastrado com sucesso');
         }
         return redirect()->back()->with('message', 'Erro ao cadastrar o morador');
     }
@@ -63,12 +60,8 @@ class ResidentController extends Controller
      */
     public function show($id)
     {
-        $resident = $this->residents->find($id);
-        $condo = $this->condominiuns->where('id', $resident->condominia_id)->first();
-        $condominiuns = [
-            'name' => $condo->name
-        ];
-        return view('residents.show', ['resident' => $resident], compact('condominiuns'));
+        $condominium = $this->condominiuns->find($id);
+        return view('condominiuns.show', ['condominium' => $condominium]);
     }
 
     /**
@@ -77,10 +70,9 @@ class ResidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Resident $resident)
+    public function edit(Condominium $condominium)
     {
-        $condominiums = $this->condominiuns->all();
-        return view('residents.edit', ['resident' => $resident], compact('condominiums'));
+        return view('condominiuns.edit', ['condominium' => $condominium]);
     }
 
     /**
@@ -92,9 +84,9 @@ class ResidentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updated = $this->residents->where('id', $id)->update($request->except('_token', '_method'));
+        $updated = $this->condominiuns->where('id', $id)->update($request->except('_token', '_method'));
         if ($updated) {
-            return redirect()->back()->with('message', 'Morador(a) atualizado com sucesso');
+            return redirect()->back()->with('message', 'Condomínio atualizado com sucesso');
         }
         return redirect()->back()->with('message', 'Erro ao atualizar o morador');
     }
@@ -107,7 +99,7 @@ class ResidentController extends Controller
      */
     public function destroy($id)
     {
-        $this->residents->where('id', $id)->delete();
-        return redirect()->route('residents.index')->with('message', 'Morador(a) deletado com sucesso');
+        $this->condominiuns->where('id', $id)->delete();
+        return redirect()->route('condominiuns.index')->with('message', 'Condomínio deletado com sucesso');
     }
 }

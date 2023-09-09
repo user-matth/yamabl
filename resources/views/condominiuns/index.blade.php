@@ -2,42 +2,42 @@
 @section('content')
     <main class="py-3">
         <div class="d-flex align-items-center justify-content-between flex-row">
-            <h2 class="text-start">Residentes</h2>
-            <a href="/yamabl/public/residents/create" class="btn btn-primary btn-sm">Novo</a>
+            <h4 class="text-start">Condomínos</h4>
+            <a href="{{ route('condominiuns.create') }}" class="btn btn-primary btn-sm">Novo</a>
         </div>
-        <hr>
+        @if (session()->has('message'))
+            <div class= "alert alert-success" role="alert">
+                {{ session()->get('message') }}
+            </div>
+        @endif
         <table class="table">
         <thead>
             <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+                <th scope="col" style="width: 40px">#</th>
+                <th scope="col" class="text-start">Nome</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            </tr>
-            <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            </tr>
-            <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-            </tr>
+            @foreach ($condominiuns as $condominium)
+                <tr>
+                    <th scope="row">{{ $condominium->id }}</th>
+                    <td class="text-start">{{ $condominium->name }}</td>
+                    <td class="text-end">
+                        <a href="{{ route('condominiuns.edit', ['condominium' => $condominium->id]) }}" class="text-black text-decoration-none">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </a>
+                        <a href="{{ route('condominiuns.show', ['condominium' => $condominium->id]) }}" class="text-black text-decoration-none">
+                            <span class="material-symbols-outlined">
+                                visibility
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
         </table>
-        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-        <p class="lead">
-        <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-        </p>
     </main>
 @endsection

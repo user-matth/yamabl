@@ -20,6 +20,7 @@
                 <div class="col-sm-4 d-flex flex-column justify-content-center align-items-start">
                     <label for="firstName" class="form-label">Condomínio</label>
                     <select class="form-select" name="condominia_id" aria-label="Select Condominium">
+                        <option value="null" selected>Selecionar</option>
                         @foreach ($condominiums as $condominium)
                             <option value="{{ (int)$condominium->id }}">{{ $condominium->name }}</option>
                         @endforeach
